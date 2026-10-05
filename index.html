@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Jan Garefelts personliga sajt. Identitetsverifiering, några riktigt dåliga ordvitsar och gott om plats att sucka.">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>Jan Garefelt — identitet och en och annan ordvits</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f3ec;
+      --ink: #263b36;
+      --muted: #626b61;
+      --line: #d8d9cc;
+      --orange: #be572f;
+      --mint: #e8ede4;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.65 var(--sans); }
+    a { color: inherit; text-underline-offset: .24em; }
+    a:hover { color: var(--orange); }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--orange); outline-offset: 7px; border-radius: 2px; }
+    ::selection { background: #f1d2ae; color: var(--ink); }
+    .wrap { width: min(1180px, calc(100% - 112px)); margin-inline: auto; }
+    .skip-link { position: fixed; top: 16px; left: 24px; padding: 10px 18px; background: white; z-index: 10; }
+    .skip-link:not(:focus) { clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; white-space: nowrap; padding: 0; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 34px; border-bottom: 1px solid var(--line); }
+    .wordmark { display: inline-flex; gap: 12px; align-items: center; text-decoration: none; font-size: 15px; font-weight: 650; letter-spacing: -.02em; }
+    .monogram { display: grid; place-items: center; background: var(--ink); color: var(--paper); width: 36px; height: 36px; border-radius: 50%; font: italic 23px/1 var(--serif); padding-bottom: 4px; }
+    .header-link { font-size: 13px; text-decoration: none; }
+    .header-link span { margin-left: 12px; font-size: 20px; }
+    .eyebrow { margin: 0 0 22px; font-size: 11px; font-weight: 650; letter-spacing: .19em; text-transform: uppercase; }
+    .hero { display: grid; grid-template-columns: 1.45fr 1fr; gap: 80px; align-items: center; padding-block: 100px 104px; }
+    h1 { font: 400 clamp(76px, 8.4vw, 116px)/.99 var(--serif); letter-spacing: -.065em; margin: 0; }
+    h1 span { display: block; }
+    h1 .surname { font-style: italic; }
+    .hero-note { max-width: 375px; padding-top: 22px; position: relative; }
+    .hero-note::before { content: ''; display: block; width: 38px; height: 2px; background: var(--orange); margin-bottom: 27px; }
+    .hero-note p { margin: 0; font-size: 19px; line-height: 1.75; }
+    .microsoft { display: inline-block; margin-top: 18px; color: var(--orange); font: italic 24px/1.4 var(--serif); transform: rotate(-4deg); }
+    .intro { display: flex; align-items: end; justify-content: space-between; gap: 48px; padding-block: 35px 42px; border-top: 1px solid var(--line); }
+    h2 { font: 400 clamp(36px, 4.3vw, 58px)/1.14 var(--serif); letter-spacing: -.045em; margin: 0; }
+    .intro p { margin: 0; color: var(--muted); max-width: 345px; font-size: 15px; }
+    .intro .eyebrow { color: var(--orange); margin-bottom: 14px; }
+    .jokes { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px 24px; padding: 20px 0 110px; align-items: start; }
+    .joke { grid-column: span 5; padding: 34px 36px 30px; background: #fffdf8; border: 1px solid #e5e0d5; border-radius: 4px; box-shadow: 0 7px 20px #293c3510; }
+    .joke:nth-child(1) { grid-column: 1 / span 5; transform: rotate(-1.5deg); }
+    .joke:nth-child(2) { grid-column: 8 / span 5; margin-top: 76px; transform: rotate(1deg); }
+    .joke:nth-child(3) { grid-column: 2 / span 5; background: var(--mint); transform: rotate(.8deg); }
+    .joke:nth-child(4) { grid-column: 8 / span 5; margin-top: 72px; transform: rotate(-1deg); }
+    .joke:nth-child(5) { grid-column: 1 / span 5; margin-top: 16px; transform: rotate(-.7deg); }
+    .joke:nth-child(6) { grid-column: 7 / span 6; margin-top: 68px; background: var(--ink); color: var(--paper); border-color: var(--ink); transform: rotate(1deg); }
+    .joke-index { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--muted); font: 11px/1.5 var(--sans); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 24px; }
+    .joke-index .number { font: italic 20px/1 var(--serif); letter-spacing: 0; color: var(--orange); }
+    h3 { margin: 0; font: 400 clamp(25px, 2.35vw, 32px)/1.3 var(--serif); letter-spacing: -.025em; text-wrap: pretty; }
+    .context { margin: 0 0 18px; font-size: 13px; line-height: 1.7; color: #d3dfd6; max-width: 320px; }
+    details { margin-top: 28px; }
+    summary { cursor: pointer; display: flex; align-items: center; gap: 12px; width: fit-content; min-height: 44px; font-size: 13px; font-weight: 600; color: var(--orange); list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: '+'; display: grid; place-items: center; width: 25px; height: 25px; border: 1px solid currentColor; border-radius: 50%; font: 20px/1 var(--sans); font-weight: 300; flex: 0 0 auto; }
+    details[open] > summary::before { content: '−'; }
+    summary .when-open, details[open] > summary .when-closed { display: none; }
+    details[open] > summary .when-open { display: inline; }
+    .answer-panel { padding-top: 14px; }
+    .answer { margin: 0; font: italic 26px/1.45 var(--serif); letter-spacing: -.02em; }
+    .rimshot { display: flex; align-items: center; gap: 7px; min-height: 58px; margin-top: 17px; color: var(--orange); }
+    .rimshot span { display: inline-block; font-size: 10px; line-height: 1; letter-spacing: .08em; font-weight: 750; padding: 8px 9px; border: 1px solid currentColor; border-radius: 50%; transform: rotate(-10deg); }
+    .rimshot span:nth-child(2) { transform: rotate(9deg); }
+    .rimshot span:nth-child(3) { border-radius: 2px; font-size: 12px; background: var(--orange); border-color: var(--orange); color: #fffdf8; transform: rotate(-7deg); }
+    .joke:nth-child(6) .joke-index { color: #c8d2ca; }
+    .joke:nth-child(6) .number, .joke:nth-child(6) summary, .joke:nth-child(6) .rimshot { color: #edb68c; }
+    .joke:nth-child(6) .rimshot span:nth-child(3) { background: #edb68c; border-color: #edb68c; color: var(--ink); }
+    .follow-up { border-top: 1px solid #ffffff30; margin-top: 16px; padding-top: 12px; }
+    .closing { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 100px; padding-block: 84px 98px; }
+    .closing .eyebrow { color: var(--muted); }
+    blockquote { margin: 0; }
+    .haiku { font: italic clamp(24px, 2.5vw, 32px)/1.75 var(--serif); letter-spacing: -.02em; }
+    .haiku span { display: block; }
+    .epitaph { padding-top: 52px; }
+    .epitaph blockquote { font: 400 clamp(26px, 2.5vw, 34px)/1.4 var(--serif); letter-spacing: -.025em; }
+    .asterisk { font: 58px/.8 var(--serif); color: var(--orange); display: block; margin-bottom: 23px; }
+    footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding-block: 26px 36px; color: var(--muted); font-size: 12px; }
+    footer a { text-decoration: none; }
+    @keyframes drumbeat {
+      0% { opacity: 0; translate: 0 12px; scale: .6; }
+      55% { opacity: 1; translate: 0 -5px; scale: 1.2; }
+      100% { opacity: 1; translate: 0 0; scale: 1; }
+    }
+    @keyframes cymbal {
+      0% { opacity: 0; translate: 0 12px; scale: .4; rotate: -15deg; }
+      40% { opacity: 1; translate: 0 -8px; scale: 1.4; rotate: 12deg; }
+      65% { rotate: -9deg; }
+      85% { rotate: 5deg; }
+      100% { opacity: 1; translate: 0 0; scale: 1; rotate: 0deg; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .rimshot.playing span { animation: drumbeat 400ms both; }
+      .rimshot.playing span:nth-child(1) { animation-delay: 180ms; }
+      .rimshot.playing span:nth-child(2) { animation-delay: 430ms; }
+      .rimshot.playing span:nth-child(3) { animation: cymbal 650ms 730ms both; }
+    }
+    @media (min-width: 1500px) { .hero { padding-block: 120px; } .jokes { row-gap: 64px; } }
+    @media (max-width: 1000px) {
+      .wrap { width: calc(100% - 72px); }
+      .hero { gap: 40px; padding-block: 76px; }
+      .hero-note p { font-size: 17px; }
+      .joke { padding: 28px; }
+      .joke:nth-child(odd) { grid-column: 1 / span 6; }
+      .joke:nth-child(even) { grid-column: 7 / span 6; }
+      .joke:nth-child(6) { margin-top: 52px; }
+      .closing { gap: 56px; }
+    }
+    @media (max-width: 650px) {
+      .wrap { width: calc(100% - 40px); }
+      .masthead { padding-block: 22px; gap: 14px; }
+      .header-link { font-size: 12px; }
+      .header-link span { margin-left: 5px; }
+      .wordmark { gap: 8px; font-size: 13px; }
+      .monogram { width: 30px; height: 30px; font-size: 20px; }
+      .hero { grid-template-columns: 1fr; padding-block: 62px 58px; gap: 36px; }
+      h1 { font-size: clamp(70px, 18vw, 110px); }
+      .hero-note { padding-top: 0; max-width: 410px; }
+      .hero-note::before { margin-bottom: 18px; }
+      .hero-note p { font-size: 17px; }
+      .microsoft { margin-top: 12px; font-size: 22px; }
+      .intro { display: block; padding-block: 32px 28px; }
+      .intro p { margin-top: 20px; max-width: 390px; }
+      .intro .eyebrow { margin-top: 0; }
+      .jokes { display: flex; flex-direction: column; gap: 30px; padding: 10px 4px 64px; }
+      .joke { width: 100%; padding: 27px 26px 23px; }
+      .joke:nth-child(n) { margin-top: 0; }
+      .joke:nth-child(odd) { width: calc(100% - 8px); align-self: flex-start; }
+      .joke:nth-child(even) { width: calc(100% - 8px); align-self: flex-end; }
+      .joke-index { margin-bottom: 19px; }
+      h3 { font-size: 27px; }
+      .answer { font-size: 25px; }
+      details { margin-top: 20px; }
+      .closing { grid-template-columns: 1fr; gap: 52px; padding-block: 52px 62px; }
+      .haiku { font-size: 27px; }
+      .epitaph { padding-top: 0; max-width: 390px; }
+      .epitaph blockquote { font-size: 29px; }
+      footer { align-items: start; font-size: 11px; gap: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: white; }
+      .wrap { width: 100%; }
+      .hero, .closing { padding-block: 30px; }
+      .jokes { display: block; }
+      .joke:nth-child(n) { width: 100%; margin: 20px 0; transform: none; break-inside: avoid; box-shadow: none; color: black; background: white; }
+      summary, .rimshot, .skip-link, .header-link { display: none; }
+      details::details-content { content-visibility: visible; display: block; }
+      details > .answer-panel { display: block !important; }
+      .joke:nth-child(6) .context, .joke:nth-child(6) .joke-index { color: #444; }
+    }
+  </style>
+</head>
+<body id="toppen">
+  <a class="skip-link" href="#innehall">Hoppa till innehållet</a>
+  <header class="masthead wrap">
+    <a class="wordmark" href="#toppen" aria-label="Jan Garefelt, till toppen"><span class="monogram" aria-hidden="true">jg.</span> garefelt.se</a>
+    <a class="header-link" href="#ordvitsar">Till ordvitsarna <span aria-hidden="true">↘</span></a>
+  </header>
+  <main id="innehall" class="wrap">
+    <section class="hero" aria-labelledby="sidtitel">
+      <div>
+        <p class="eyebrow">En liten plats på internet</p>
+        <h1 id="sidtitel"><span>Jan</span><span class="surname">Garefelt.</span></h1>
+      </div>
+      <div class="hero-note">
+        <p>Denna sajts syfte är främst att verifiera Jan Garefelts identitet mot diverse tjänster.</p>
+        <span class="microsoft">(Hej Microsoft!)</span>
+      </div>
+    </section>
+
+    <section id="ordvitsar" aria-labelledby="vitstitel">
+      <div class="intro">
+        <div>
+          <p class="eyebrow">Till vänner som hittar hit</p>
+          <h2 id="vitstitel">Gott om plats för en suck.</h2>
+        </div>
+        <p>Här är några riktigt dåliga ordvitsar. Klicka fram svaren i din egen takt. En djup suck mellan varje är helt i sin ordning.</p>
+      </div>
+      <div class="jokes">
+        <article class="joke" aria-labelledby="fraga-1">
+          <div class="joke-index"><span>Ö-liv</span><span class="number">01</span></div>
+          <h3 id="fraga-1">Var bor de lataste öborna?</h3>
+          <details>
+            <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
+            <div class="answer-panel">
+              <p class="answer">På Menorca!</p>
+              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+            </div>
+          </details>
+        </article>
+        <article class="joke" aria-labelledby="fraga-2">
+          <div class="joke-index"><span>En bråkdel av humorn</span><span class="number">02</span></div>
+          <h3 id="fraga-2">Vad heter talet överst i ett bråk?</h3>
+          <details>
+            <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
+            <div class="answer-panel">
+              <p class="answer">Täljare. Tänkte bara nämna're!</p>
+              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+            </div>
+          </details>
+        </article>
+        <article class="joke" aria-labelledby="fraga-3">
+          <div class="joke-index"><span>En rimlig invändning</span><span class="number">03</span></div>
+          <h3 id="fraga-3">Varför ska man aldrig dra ett dåligt skämt?</h3>
+          <details>
+            <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
+            <div class="answer-panel">
+              <p class="answer">Det är liksom ingen vits...</p>
+              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+            </div>
+          </details>
+        </article>
+        <article class="joke" aria-labelledby="fraga-4">
+          <div class="joke-index"><span>Från grönsaksdisken</span><span class="number">04</span></div>
+          <h3 id="fraga-4">Varför haffade polisen grönsakshandlaren?</h3>
+          <details>
+            <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
+            <div class="answer-panel">
+              <p class="answer">Han sålde grönt svart!</p>
+              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+            </div>
+          </details>
+        </article>
+        <article class="joke" aria-labelledby="fraga-5">
+          <div class="joke-index"><span>En privat reseskildring</span><span class="number">05</span></div>
+          <h3 id="fraga-5">Åkte du till Afrika på din semester?</h3>
+          <details>
+            <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
+            <div class="answer-panel">
+              <p class="answer">Det Angola inte dej!</p>
+              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+            </div>
+          </details>
+        </article>
+        <article class="joke" aria-labelledby="fraga-6">
+          <div class="joke-index"><span>För den uppkopplade</span><span class="number">06</span></div>
+          <p class="context">Kanske roligast för den som har goda kontakter inom nätverksteknik:</p>
+          <h3 id="fraga-6">Vilka är det mest synd om på hela Internet?</h3>
+          <details>
+            <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
+            <div class="answer-panel">
+              <p class="answer">IP-stackarna!</p>
+              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <details class="follow-up">
+                <summary><span class="when-closed">Det kommer mera…</span><span class="when-open">Dölj fortsättningen</span></summary>
+                <div class="answer-panel">
+                  <p class="answer">ACK, ja. Det är SYN om dom!</p>
+                  <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+                </div>
+              </details>
+            </div>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing" aria-label="Några sista ord">
+      <div>
+        <p class="eyebrow">En ordvits-haiku</p>
+        <blockquote class="haiku"><span>En ordvits är klar</span><span>när den är levererad, </span><span>och sucken kommit</span></blockquote>
+      </div>
+      <div class="epitaph">
+        <span class="asterisk" aria-hidden="true">✳</span>
+        <p class="eyebrow">På min gravsten ska det stå</p>
+        <blockquote>”Det här är nog min sista ordvits, men det är inte hugget i sten!”</blockquote>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><span>Jan Garefelt · garefelt.se</span><a href="#toppen">Tillbaka till toppen ↑</a></footer>
+  <script>
+    document.querySelectorAll('details').forEach((disclosure) => {
+      disclosure.addEventListener('toggle', () => {
+        const rimshot = disclosure.querySelector(':scope > .answer-panel > .rimshot');
+        rimshot?.classList.toggle('playing', disclosure.open);
+        if (!disclosure.open) {
+          disclosure.querySelectorAll('details[open]').forEach((nested) => { nested.open = false; });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
