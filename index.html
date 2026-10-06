@@ -74,7 +74,8 @@
     .joke:nth-child(6) .joke-index { color: #c8d2ca; }
     .joke:nth-child(6) .number, .joke:nth-child(6) summary, .joke:nth-child(6) .rimshot { color: #edb68c; }
     .joke:nth-child(6) .rimshot span:nth-child(3) { background: #edb68c; border-color: #edb68c; color: var(--ink); }
-    .follow-up { border-top: 1px solid #ffffff30; margin-top: 16px; padding-top: 12px; }
+    .follow-up { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 12px; }
+    .joke:nth-child(6) .follow-up { border-top-color: #ffffff30; }
     .closing { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 100px; padding-block: 84px 98px; }
     .closing .eyebrow { color: var(--muted); }
     blockquote { margin: 0; }
@@ -194,6 +195,13 @@
             <div class="answer-panel">
               <p class="answer">Täljare. Tänkte bara nämna're!</p>
               <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <details class="follow-up">
+                <summary><span class="when-closed">Det kommer mera…</span><span class="when-open">Dölj fortsättningen</span></summary>
+                <div class="answer-panel">
+                  <p class="answer">I ett knivbråk är alla täljare!</p>
+                  <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+                </div>
+              </details>
             </div>
           </details>
         </article>
