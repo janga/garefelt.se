@@ -67,13 +67,24 @@
     details[open] > summary .when-open { display: inline; }
     .answer-panel { padding-top: 14px; }
     .answer { margin: 0; font: italic 26px/1.45 var(--serif); letter-spacing: -.02em; }
-    .rimshot { display: flex; align-items: center; gap: 7px; min-height: 58px; margin-top: 17px; color: var(--orange); }
-    .rimshot span { display: inline-block; font-size: 10px; line-height: 1; letter-spacing: .08em; font-weight: 750; padding: 8px 9px; border: 1px solid currentColor; border-radius: 50%; transform: rotate(-10deg); }
-    .rimshot span:nth-child(2) { transform: rotate(9deg); }
-    .rimshot span:nth-child(3) { border-radius: 2px; font-size: 12px; background: var(--orange); border-color: var(--orange); color: #fffdf8; transform: rotate(-7deg); }
+    .rimshot { --fx-ink: #263b36; --fx-orange: #be572f; --fx-gold: #edc765; margin-top: 20px; width: 100%; max-width: 350px; }
+    .rimshot svg { display: block; width: 100%; height: auto; overflow: hidden; border-radius: 5px; }
+    .rimshot .line { fill: none; stroke: var(--fx-ink); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+    .rimshot .word { fill: var(--fx-ink); font: 900 23px/1 'Trebuchet MS', var(--sans); letter-spacing: -.6px; }
+    .rimshot .small-word { font-size: 17px; }
+    .rimshot .micro { fill: var(--fx-ink); font: 10px/1 var(--sans); letter-spacing: 1.8px; }
+    .rimshot .beat, .rimshot .prop { transform-box: fill-box; transform-origin: center; }
+    .rimshot .beat-1 { --delay: 180ms; }
+    .rimshot .beat-2 { --delay: 580ms; }
+    .rimshot .beat-3 { --delay: 1000ms; }
+    .rimshot .cymbal { transform-origin: 50% 70%; }
+    .rimshot .drumstick { transform-origin: 10% 90%; }
+    .rimshot .palm { transform-origin: 50% 100%; }
+    .rimshot .weed { translate: 190px 0; rotate: 300deg; }
+    .rimshot .mono { fill: #a8e6bf; font: 16px/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .rimshot .terminal-line { transform-origin: left center; }
     .joke:nth-child(6) .joke-index { color: #c8d2ca; }
-    .joke:nth-child(6) .number, .joke:nth-child(6) summary, .joke:nth-child(6) .rimshot { color: #edb68c; }
-    .joke:nth-child(6) .rimshot span:nth-child(3) { background: #edb68c; border-color: #edb68c; color: var(--ink); }
+    .joke:nth-child(6) .number, .joke:nth-child(6) summary { color: #edb68c; }
     .follow-up { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 12px; }
     .joke:nth-child(6) .follow-up { border-top-color: #ffffff30; }
     .closing { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 100px; padding-block: 84px 98px; }
@@ -86,23 +97,67 @@
     .asterisk { font: 58px/.8 var(--serif); color: var(--orange); display: block; margin-bottom: 23px; }
     footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding-block: 26px 36px; color: var(--muted); font-size: 12px; }
     footer a { text-decoration: none; }
-    @keyframes drumbeat {
-      0% { opacity: 0; translate: 0 12px; scale: .6; }
-      55% { opacity: 1; translate: 0 -5px; scale: 1.2; }
-      100% { opacity: 1; translate: 0 0; scale: 1; }
+    @keyframes fx-pop {
+      0% { opacity: 0; scale: .25; translate: 0 12px; }
+      65% { opacity: 1; scale: 1.13; translate: 0 -3px; }
+      100% { opacity: 1; scale: 1; translate: 0 0; }
     }
-    @keyframes cymbal {
-      0% { opacity: 0; translate: 0 12px; scale: .4; rotate: -15deg; }
-      40% { opacity: 1; translate: 0 -8px; scale: 1.4; rotate: 12deg; }
-      65% { rotate: -9deg; }
-      85% { rotate: 5deg; }
-      100% { opacity: 1; translate: 0 0; scale: 1; rotate: 0deg; }
+    @keyframes fx-wobble {
+      0%, 100% { rotate: 0deg; }
+      25% { rotate: 12deg; }
+      50% { rotate: -9deg; }
+      75% { rotate: 5deg; }
     }
+    @keyframes fx-tap {
+      0%, 100% { rotate: 0deg; }
+      40% { rotate: 24deg; }
+      65% { rotate: -10deg; }
+    }
+    @keyframes fx-drift {
+      0% { opacity: 0; translate: -15px 10px; }
+      50% { opacity: 1; }
+      100% { opacity: 1; translate: 0 0; }
+    }
+    @keyframes fx-stamp {
+      0% { opacity: 0; scale: 2.1; rotate: -18deg; }
+      65% { opacity: 1; scale: .92; rotate: 3deg; }
+      100% { opacity: 1; scale: 1; rotate: 0deg; }
+    }
+    @keyframes fx-weed {
+      from { translate: 0 0; rotate: 0deg; }
+      to { translate: 190px 0; rotate: 300deg; }
+    }
+    @keyframes fx-sag {
+      0% { opacity: 0; translate: 0 -12px; rotate: 0deg; }
+      40% { opacity: 1; translate: 0 0; rotate: 0deg; }
+      75% { rotate: 9deg; }
+      100% { opacity: 1; translate: 0 0; rotate: 6deg; }
+    }
+    @keyframes fx-fly {
+      from { translate: -175px 30px; opacity: 0; }
+      15% { opacity: 1; }
+      to { translate: 0 0; opacity: 1; }
+    }
+    @keyframes fx-packet {
+      0% { opacity: 0; translate: 0 -40px; }
+      65% { opacity: 1; translate: 0 5px; }
+      85% { translate: 0 -3px; }
+      100% { opacity: 1; translate: 0 0; }
+    }
+    @keyframes fx-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
     @media (prefers-reduced-motion: no-preference) {
-      .rimshot.playing span { animation: drumbeat 400ms both; }
-      .rimshot.playing span:nth-child(1) { animation-delay: 180ms; }
-      .rimshot.playing span:nth-child(2) { animation-delay: 430ms; }
-      .rimshot.playing span:nth-child(3) { animation: cymbal 650ms 730ms both; }
+      .rimshot.playing .beat { animation: fx-pop 430ms var(--delay) both; }
+      .rimshot.playing .cymbal { animation: fx-wobble 700ms 1150ms both; }
+      .rimshot.playing .drumstick { animation: fx-tap 380ms 450ms 2; }
+      .rimshot--island.playing .beat { animation-name: fx-drift; animation-duration: 700ms; }
+      .rimshot--island.playing .palm { animation: fx-wobble 1600ms 200ms both; }
+      .rimshot--fraction.playing .beat-3, .rimshot--ticket.playing .beat-3 { animation-name: fx-stamp; }
+      .rimshot--comic.playing .beat { animation-name: fx-stamp; }
+      .rimshot--silence.playing .beat { animation-name: fx-sag; animation-duration: 900ms; }
+      .rimshot--silence.playing .weed { animation: fx-weed 2000ms 200ms both; }
+      .rimshot--ticket.playing .plane { animation: fx-fly 1200ms 200ms both; }
+      .rimshot--packets.playing .beat { animation-name: fx-packet; animation-duration: 600ms; }
+      .rimshot--terminal.playing .beat { animation: fx-type 450ms steps(9, end) var(--delay) both; }
     }
     @media (min-width: 1500px) { .hero { padding-block: 120px; } .jokes { row-gap: 64px; } }
     @media (max-width: 1000px) {
@@ -183,7 +238,24 @@
             <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
             <div class="answer-panel">
               <p class="answer">På Menorca!</p>
-              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <div class="rimshot rimshot--island" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="320" height="150" rx="6" fill="#edf2ed"/>
+                  <circle cx="270" cy="32" r="19" fill="#edc765"/>
+                  <path d="M262 32h5m8 0h5" class="line"/>
+                  <path d="M0 112q32-10 64 0t64 0t64 0t64 0t64 0v38H0" fill="#bad8cc"/>
+                  <path d="M12 131q16-8 32 0m76 0q16-8 32 0m91 0q16-8 32 0" fill="none" stroke="#779e91" stroke-width="2"/>
+                  <path d="M28 120q45-29 85 0" fill="#edcf92" stroke="#263b36" stroke-width="2"/>
+                  <g class="prop palm">
+                    <path d="M72 113q18-31 3-64" fill="none" stroke="#9c6b46" stroke-width="7"/>
+                    <path d="M75 50Q35 19 29 57q26-13 46-7Q52 10 85 17q-9 16-10 33q28-43 46-12q-28-2-46 12q43-11 39 19q-22-20-39-19" fill="#608b68" stroke="#263b36" stroke-width="2" stroke-linejoin="round"/>
+                    <circle cx="76" cy="54" r="5" fill="#9c6b46"/>
+                  </g>
+                  <g class="beat beat-1"><path d="M113 18q30-13 63 0v29h-45l-9 8 1-12h-10Z" fill="#fffdf8"/><text x="126" y="39" class="word">BA</text></g>
+                  <g class="beat beat-2"><path d="M162 55q35-12 76 0v30h-54l-11 8 1-12h-12Z" fill="#fffdf8"/><text x="173" y="77" class="word">DUM</text></g>
+                  <g class="beat beat-3"><path d="M222 90q32-13 78 0v29h-50l-10 7 1-12h-19Z" fill="#fffdf8"/><text x="232" y="112" class="word" style="fill:#be572f">TSS…</text></g>
+                </svg>
+              </div>
             </div>
           </details>
         </article>
@@ -194,12 +266,46 @@
             <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
             <div class="answer-panel">
               <p class="answer">Täljare. Tänkte bara nämna're!</p>
-              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <div class="rimshot rimshot--fraction" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="320" height="150" rx="6" fill="#f0eee3"/>
+                  <path d="M0 25H320M0 50H320M0 75H320M0 100H320M0 125H320M25 0V150M50 0V150M75 0V150M100 0V150M125 0V150M150 0V150M175 0V150M200 0V150M225 0V150M250 0V150M275 0V150M300 0V150" stroke="#d9ddcf" fill="none"/>
+                  <path d="M36 24q-10 53 0 99m111-99q10 53 0 99" class="line"/>
+                  <path d="M51 71l81-2" stroke="#263b36" stroke-width="3" stroke-linecap="round"/>
+                  <g class="beat beat-1"><text x="91" y="57" text-anchor="middle" class="word" style="font:italic bold 38px Georgia,serif">Ba</text></g>
+                  <g class="beat beat-2"><text x="91" y="113" text-anchor="middle" class="word" style="font:italic bold 32px Georgia,serif">Dum</text></g>
+                  <path d="M167 65h21m-21 12h21" class="line"/>
+                  <g class="beat beat-3">
+                    <path d="m209 42 87-5 4 66-87 7Z" fill="#edc765" stroke="#263b36" stroke-width="2"/>
+                    <text x="223" y="84" class="word" style="font-size:27px">TSS!</text>
+                    <path d="m226 94 57-3" stroke="#be572f" stroke-width="3"/>
+                  </g>
+                </svg>
+              </div>
               <details class="follow-up">
                 <summary><span class="when-closed">Det kommer mera…</span><span class="when-open">Dölj fortsättningen</span></summary>
                 <div class="answer-panel">
                   <p class="answer">I ett knivbråk är alla täljare!</p>
-                  <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+                  <div class="rimshot rimshot--comic" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 4 102 2 100 147 2 145Z" fill="#f7e4ce" stroke="#263b36" stroke-width="2"/>
+                  <path d="m109 3 98 1-1 142-98 1Z" fill="#e3eadd" stroke="#263b36" stroke-width="2"/>
+                  <path d="m214 3 103-1 1 145-104-1Z" fill="#f3cd66" stroke="#263b36" stroke-width="2"/>
+                  <g class="line">
+                    <circle cx="27" cy="76" r="12" fill="#fffdf8"/><path d="M22 73h1m7 0h1m-8 8q4 3 8 0M27 88v29m0-17-14 10m14-10 21-10m-21 27-9 18m9-18 10 18"/>
+                    <ellipse cx="65" cy="100" rx="23" ry="8" fill="#be572f"/><path d="M42 100v22q23 17 46 0v-22M47 106l6 17 9-15 9 18 11-19"/>
+                    <path d="m48 92 28-18" class="prop drumstick"/>
+                    <circle cx="135" cy="76" r="12" fill="#fffdf8"/><path d="m130 71 3 2m4 0 3-2m-8 11h6m-3 6v29m0-17-12 11m12-11 25-5m-25 22-9 18m9-18 10 18"/>
+                    <ellipse cx="174" cy="102" rx="24" ry="8" fill="#be572f"/><path d="M150 102v22q24 17 48 0v-22M155 108l7 17 9-15 10 17 12-20"/>
+                    <path d="m160 95 28-18" class="prop drumstick"/>
+                  </g>
+                  <g class="beat beat-1"><path d="M14 12q34-14 75 0v33H50l-9 13-2-13H14Z" fill="#fffdf8" stroke="#263b36" stroke-width="2"/><text x="33" y="35" class="word">BA!</text></g>
+                  <g class="beat beat-2"><path d="M118 12h79v36h-37l-9 10-1-10h-32Z" fill="#fffdf8" stroke="#263b36" stroke-width="2"/><text x="126" y="36" class="word">DUM!</text><path d="m168 65 5 15m17-14-9 14" class="line"/></g>
+                  <g class="beat beat-3"><path d="m264 12 9 19 22-11-3 22 19 2-14 17 17 16-24 5 3 23-23-10-10 19-10-21-22 9 5-23-17-10 18-13-12-18 24 4Z" fill="#fffdf8" stroke="#263b36" stroke-width="2"/><text x="231" y="74" class="word" style="font-size:28px;fill:#be572f">TSS!</text></g>
+                  <path d="M265 116v26m-12 0 12-6 13 6" class="line"/>
+                  <g class="prop cymbal"><ellipse cx="265" cy="116" rx="32" ry="6" fill="#fff5be" stroke="#263b36" stroke-width="2"/><path d="M261 114q4-8 8 0" class="line"/></g>
+                </svg>
+              </div>
                 </div>
               </details>
             </div>
@@ -212,7 +318,23 @@
             <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
             <div class="answer-panel">
               <p class="answer">Det är ingen vits...</p>
-              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <div class="rimshot rimshot--silence" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="320" height="150" rx="6" fill="#dce4d7"/>
+                  <path d="M0 6h31l-7 96L0 114Z" fill="#9eae99"/>
+                  <path d="m10 12-4 86m13-86-7 80" stroke="#7c9279" fill="none"/>
+                  <path d="M10 120h298m-298 8h298" stroke="#a5b39e" fill="none"/>
+                  <path d="M58 51v68m-14 0h29M58 53l18-9" class="line"/>
+                  <rect x="66" y="30" width="12" height="26" rx="6" fill="#263b36" transform="rotate(32 72 43)"/>
+                  <path d="M75 51q18 26-5 37t6 32" class="line"/>
+                  <g class="prop weed" fill="none" stroke="#9c8151" stroke-width="1.7">
+                    <circle cx="27" cy="105" r="14"/><ellipse cx="27" cy="105" rx="7" ry="16" transform="rotate(30 27 105)"/><path d="m12 98 29 13m-22-19 14 27m-21-14 29-7m-25 17 18-25M13 97l-5-4m30 20 8 4m-22-24-3-8"/>
+                  </g>
+                  <g class="beat beat-1"><text x="98" y="39" class="word small-word" style="fill:#63745f">Ba…</text></g>
+                  <g class="beat beat-2"><text x="150" y="61" class="word small-word" style="fill:#63745f">Dum…</text></g>
+                  <g class="beat beat-3"><path d="M222 59q36-8 79 3l-1 35-26-2-12 12-1-13-41-2Z" fill="#f4f3e9" stroke="#63745f" stroke-width="1.5"/><text x="233" y="85" class="word small-word" style="fill:#63745f">tss.</text></g>
+                </svg>
+              </div>
             </div>
           </details>
         </article>
@@ -223,7 +345,38 @@
             <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
             <div class="answer-panel">
               <p class="answer">Han sålde grönt svart!</p>
-              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <div class="rimshot rimshot--vegetables" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="320" height="150" rx="6" fill="#f7eddf"/>
+                  <path d="M17 128h285" stroke="#d5c7ac" stroke-width="2"/>
+                  <g class="beat beat-1">
+                    <text x="31" y="31" class="word small-word">BA!</text>
+                    <path d="M49 57q-30 14-25 41t48 0q6-24-23-41" fill="#fffdf8" stroke="#263b36" stroke-width="2"/>
+                    <path d="m49 60-5-15m5 15 5-18m-8 80-6 6m14-6 5 6" class="line"/>
+                    <path d="M49 66q-21 27-8 41m10-41q17 26 9 41" fill="none" stroke="#d5c7ac" stroke-width="2"/>
+                    <circle cx="40" cy="88" r="2.5" fill="#263b36"/><circle cx="55" cy="88" r="2.5" fill="#263b36"/>
+                    <path d="M43 95q4 5 8 0m-26-13-10-9m58 13 13-8" class="line"/>
+                    <path d="m15 73-7-13m78 18 8-16" class="line"/>
+                  </g>
+                  <g class="beat beat-2">
+                    <text x="116" y="31" class="word small-word">DUM!</text>
+                    <circle cx="144" cy="88" r="28" fill="#d87853" stroke="#263b36" stroke-width="2"/>
+                    <path d="m144 68-15-9 13 2 5-17 5 17 11-4-11 12" fill="#658458" stroke="#263b36" stroke-width="1.8"/>
+                    <circle cx="135" cy="86" r="2.5" fill="#263b36"/><circle cx="151" cy="86" r="2.5" fill="#263b36"/>
+                    <path d="M137 95q7 8 14 0m-18 21-6 12m24-12 6 12m-40-39-13-9m67 10 10-11" class="line"/>
+                    <ellipse cx="144" cy="111" rx="19" ry="6" fill="#edc765" stroke="#263b36" stroke-width="2"/>
+                  </g>
+                  <g class="beat beat-3">
+                    <text x="228" y="31" class="word small-word">TSS!</text>
+                    <path d="m234 120 5-37h13l5 37" fill="#8aab6d" stroke="#263b36" stroke-width="2"/>
+                    <path d="M225 86q-20-10-9-24 1-16 20-13 11-14 24-1 22-2 20 18 13 19-9 25Z" fill="#719364" stroke="#263b36" stroke-width="2"/>
+                    <circle cx="235" cy="71" r="2.5" fill="#263b36"/><circle cx="250" cy="71" r="2.5" fill="#263b36"/>
+                    <path d="M239 79q5 4 9 0m-16 15-13-7m48 8 10 6m-39 18-4 9m19-9 6 9" class="line"/>
+                  </g>
+                  <path d="M278 106v25m-9 0 9-5 9 5" class="line"/>
+                  <g class="prop cymbal"><ellipse cx="278" cy="106" rx="23" ry="5" fill="#edc765" stroke="#263b36" stroke-width="2"/></g>
+                </svg>
+              </div>
             </div>
           </details>
         </article>
@@ -234,7 +387,20 @@
             <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
             <div class="answer-panel">
               <p class="answer">Det Angola inte dej!</p>
-              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <div class="rimshot rimshot--ticket" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 9h306v49a11 11 0 0 0 0 22v60H7V80a11 11 0 0 0 0-22Z" fill="#f2e6ca" stroke="#b5aa8a" stroke-width="1.5"/>
+                  <path d="M225 14v119" stroke="#b5aa8a" stroke-dasharray="3 4"/>
+                  <text x="22" y="29" class="micro">BA DUM AIRLINES</text>
+                  <path d="M23 95q105 29 177-3" fill="none" stroke="#b5aa8a" stroke-width="1.5" stroke-dasharray="4 5"/>
+                  <g class="beat beat-1"><text x="24" y="73" class="word" style="font-size:34px">BA</text></g>
+                  <path d="M81 62h24m-6-6 6 6-6 6" class="line"/>
+                  <g class="beat beat-2"><text x="117" y="73" class="word" style="font-size:30px">DUM</text></g>
+                  <g class="prop plane"><path d="m180 99 10-4-2-16 5-2 9 15 16-3q9-1 9 3l-23 8-2 17-5 2-2-16-9 3Z" fill="#263b36"/></g>
+                  <g class="beat beat-3"><g transform="rotate(-8 266 75)"><rect x="233" y="49" width="69" height="46" rx="3" fill="none" stroke="#be572f" stroke-width="3"/><text x="240" y="80" class="word" style="fill:#be572f">TSS!</text></g></g>
+                  <path d="M24 119v11m4-11v11m5-11v11m2-11v11m6-11v11m4-11v11m3-11v11m6-11v11m3-11v11" stroke="#7d7d68" stroke-width="2"/>
+                </svg>
+              </div>
             </div>
           </details>
         </article>
@@ -246,12 +412,38 @@
             <summary><span class="when-closed">Visa svaret</span><span class="when-open">Dölj svaret</span></summary>
             <div class="answer-panel">
               <p class="answer">IP-stackarna!</p>
-              <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+              <div class="rimshot rimshot--packets" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="320" height="150" rx="6" fill="#1b2c29"/>
+                  <path d="M20 126h279" stroke="#86a795" stroke-width="2" stroke-dasharray="4 5"/>
+                  <path d="M80 126v-7m72 7V88m78 38V55" fill="none" stroke="#86a795" stroke-width="2"/>
+                  <rect x="8" y="118" width="17" height="15" rx="2" fill="#9fbda4"/>
+                  <rect x="294" y="118" width="17" height="15" rx="2" fill="#9fbda4"/>
+                  <g class="beat beat-1"><rect x="44" y="82" width="70" height="35" rx="4" fill="#9fbda4"/><path d="M52 90h5m-5 5h5" stroke="#263b36" stroke-width="2"/><text x="66" y="107" class="word">BA</text></g>
+                  <g class="beat beat-2"><rect x="121" y="51" width="74" height="35" rx="4" fill="#edc765"/><path d="M128 58h5m-5 5h5" stroke="#263b36" stroke-width="2"/><text x="134" y="76" class="word" style="font-size:22px">DUM</text></g>
+                  <g class="beat beat-3"><rect x="202" y="18" width="77" height="35" rx="4" fill="#eaa785"/><path d="M209 25h5m-5 5h5" stroke="#263b36" stroke-width="2"/><text x="218" y="43" class="word" style="font-size:22px">TSS!</text><path d="m285 28 5 5 9-11" fill="none" stroke="#a8d9b4" stroke-width="2"/></g>
+                  <text x="26" y="30" class="micro" style="fill:#9fbda4">PUN / IP</text>
+                </svg>
+              </div>
               <details class="follow-up">
                 <summary><span class="when-closed">Det kommer mera…</span><span class="when-open">Dölj fortsättningen</span></summary>
                 <div class="answer-panel">
                   <p class="answer">ACK. Det är SYN om dom!</p>
-                  <div class="rimshot" aria-hidden="true"><span>Ba</span><span>Dum</span><span>Tss!</span></div>
+                  <div class="rimshot rimshot--terminal" aria-hidden="true">
+                <svg viewBox="0 0 320 150" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1" y="1" width="318" height="148" rx="6" fill="#111f1d" stroke="#6d9380"/>
+                  <path d="M1 29h318" stroke="#426855"/>
+                  <circle cx="16" cy="15" r="3" fill="#d99279"/><circle cx="28" cy="15" r="3" fill="#edc765"/><circle cx="40" cy="15" r="3" fill="#9fbda4"/>
+                  <text x="59" y="19" class="mono" style="font-size:10px;fill:#92b89f">rimshot.exe</text>
+                  <g class="beat beat-1 terminal-line"><text x="17" y="59" class="mono">SYN     &gt; BA</text></g>
+                  <g class="beat beat-2 terminal-line"><text x="17" y="88" class="mono">SYN-ACK &lt; DUM</text></g>
+                  <g class="beat beat-3 terminal-line">
+                    <text x="17" y="117" class="mono" style="fill:#edc765">ACK     &gt; TSS!</text>
+                    <rect x="162" y="123" width="9" height="3" fill="#a8e6bf"/>
+                    <path d="M240 57h8v16h-8zm32 0h8v16h-8zm-40 36h8v8h-8zm8 8h8v8h-8zm8 8h24v8h-24zm24-8h8v8h-8zm8-8h8v8h-8Z" fill="#a8e6bf"/>
+                  </g>
+                </svg>
+              </div>
                 </div>
               </details>
             </div>
